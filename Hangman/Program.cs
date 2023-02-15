@@ -8,6 +8,7 @@ namespace Hangman
         {
             input_word();
             under_score();
+            gess();
         }
 
         public static string answer { get; set; } = "";
@@ -16,6 +17,8 @@ namespace Hangman
         public static string word_lines { get; set; } = "";
         public static int word_line_count { get; set; } = 0;
         public static string letter { get; set; } = "";
+        public static string user_gess { get; set; } = "";
+        public static int lives { get; set; } = 10;
 
         static void input_word()
         {
@@ -32,7 +35,7 @@ namespace Hangman
                 user_word_length = user_word.Length;
                 //put each letter of the ginven word in a list
                 // letter is a local varialbal is this the reason  it cant be call outside the loop?
-                List<char> letter = new List<char>();
+                List<string> letter = new List<string>();
                 letter.AddRange(user_word);
                 //print the list of letters
                 Console.WriteLine(string.Join(" ", letter));
@@ -49,6 +52,14 @@ namespace Hangman
                 word_line_count++;
             }
             Console.WriteLine(word_lines);
+        }
+
+         static void gess()
+        {
+            user_gess = Console.ReadLine();
+            Console.WriteLine(user_gess);
+
+
         }
         //user input - word
         //make input invisebel word
