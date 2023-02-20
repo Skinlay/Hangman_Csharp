@@ -46,17 +46,7 @@ namespace Hangman
                 user_word_length = user_word.Length;
             }
             //put each letter of the ginven word in a list
-            // letter is a local varialbal is this the reason  it cant be call outside the loop?
-
-            //List<char> answer = new List<char>();
             answer.AddRange(user_word);
-
-            //Console.BackgroundColor = ConsoleColor.Blue;
-                // Console.WriteLine the list of letters
-            //Console.WriteLine(string.Join(" ", answer));
-                //Console.WriteLine(answer);
-            //Console.WriteLine("user_word = " + user_word + "  user_word_length = " + user_word_length);
-            //Console.ResetColor();
         }
         public static void under_score()
         {
@@ -73,22 +63,14 @@ namespace Hangman
             }
             Console.Write( "\r\n");
         }
-        //als de lente langer is dan 1 -> contorleer de heel worden --> correct? -> einde game -- incorect? - 1 leven, raad opnieuw 
-        //is de lengte 1 lang --> controleer of de letter in het woord zit --> correct? zet woord in lijst met letters --> raad op nieuw.
-        //              incorect? -1 leven --> sla letter op in lijst, -->
-        //              levens 0? nee ga verder -- ja, einde geme verlooren.
-        //
         static void gess()
         {
             user_gess = Console.ReadLine();
-            //Console.WriteLine("user_gess = " + user_gess);
-            //Console.BackgroundColor = ConsoleColor.Blue;
             user_gess_length = user_gess.Length;
 
             if (user_gess_length == 1)
             {
                 user_gess_char = Convert.ToChar(user_gess);
-                //Console.WriteLine("user_gess_char = " + user_gess_char);
                 if (answer.Contains(user_gess_char))
                 {
                     Console.WriteLine("nice");
@@ -111,11 +93,6 @@ namespace Hangman
                 lives -= 1;
             }
         }
-        //user input - word
-        //make input invisebel word
-        // Console.WriteLine lines
-        //user gess
-        //user lives
 
         public static void PrintHangman(int lives)
         {
