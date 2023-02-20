@@ -27,6 +27,7 @@ namespace Hangman
         public static char user_gess_char { get; set;}
         public static List<char> Correct_gess = new List<char>();
 
+
         static void input_word()
         {
             Console.WriteLine("welkom to the Hangman game");
@@ -47,39 +48,46 @@ namespace Hangman
             // letter is a local varialbal is this the reason  it cant be call outside the loop?
 
             //List<char> answer = new List<char>();
-            answer.AddRange(user_word);            
+            answer.AddRange(user_word);
 
-            //print the list of letters
-            Console.WriteLine(string.Join(" ", answer));
-            //Console.WriteLine(answer);
-            Console.WriteLine("user_word = " + user_word + "  user_word_length = " + user_word_length);
+            //Console.BackgroundColor = ConsoleColor.Blue;
+                //print the list of letters
+            //Console.WriteLine(string.Join(" ", answer));
+                //Console.WriteLine(answer);
+            //Console.WriteLine("user_word = " + user_word + "  user_word_length = " + user_word_length);
+            //Console.ResetColor();
         }
-        static void under_score()
+        public static void under_score()
         {
-            //print lins the lengt of the given word
-            while (word_line_count < user_word_length)
+            foreach (char letter in answer)
             {
-                word_lines += ("_");
-                word_line_count++;
+                if (Correct_gess.Contains(letter))
+                {
+                    Console.Write(letter);
+                }
+                else
+                {
+                    Console.Write('_');
+                }
             }
-            Console.WriteLine(word_lines);
+            Console.Write( "\r\n");
         }
         //als de lente langer is dan 1 -> contorleer de heel worden --> correct? -> einde game -- incorect? - 1 leven, raad opnieuw 
         //is de lengte 1 lang --> controleer of de letter in het woord zit --> correct? zet woord in lijst met letters --> raad op nieuw.
         //              incorect? -1 leven --> sla letter op in lijst, -->
         //              levens 0? nee ga verder -- ja, einde geme verlooren.
         //
-         static void gess()
+        static void gess()
         {
             user_gess = Console.ReadLine();
-            Console.WriteLine("user_gess = " + user_gess);
-            
+            //Console.WriteLine("user_gess = " + user_gess);
+            //Console.BackgroundColor = ConsoleColor.Blue;
             user_gess_length = user_gess.Length;
 
             if (user_gess_length == 1)
             {
                 user_gess_char = Convert.ToChar(user_gess);
-                Console.WriteLine("user_gess_char = " + user_gess_char);
+                //Console.WriteLine("user_gess_char = " + user_gess_char);
                 if (answer.Contains(user_gess_char))
                 {
                     Console.WriteLine("nice");
@@ -93,7 +101,8 @@ namespace Hangman
             }
             else if (user_gess == user_word)
             {
-                Console.WriteLine("noice");
+                Console.WriteLine("noice you win the game");
+                Environment.Exit(0);
             }
             else
             {
@@ -107,5 +116,6 @@ namespace Hangman
         //print lines
         //user gess
         //user lives
+
     }
 }
