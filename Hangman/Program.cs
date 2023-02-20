@@ -11,6 +11,7 @@ namespace Hangman
             {
                 under_score();
                 gess();
+                PrintHangman(lives);
             }
 
         }
@@ -51,7 +52,7 @@ namespace Hangman
             answer.AddRange(user_word);
 
             //Console.BackgroundColor = ConsoleColor.Blue;
-                //print the list of letters
+                // Console.WriteLine the list of letters
             //Console.WriteLine(string.Join(" ", answer));
                 //Console.WriteLine(answer);
             //Console.WriteLine("user_word = " + user_word + "  user_word_length = " + user_word_length);
@@ -109,13 +110,72 @@ namespace Hangman
                 Console.WriteLine("nope");
                 lives -= 1;
             }
-            Console.WriteLine(lives);
         }
         //user input - word
         //make input invisebel word
-        //print lines
+        // Console.WriteLine lines
         //user gess
         //user lives
+
+        public static void PrintHangman(int lives)
+        {
+            char[] lineChars = new[] // https://www.asciitable.com/ alt + cijfer code...
+            {
+                '└', //0
+                '┐', //1
+                '┘', //2
+                '┌', //3
+                '─', //4
+                '│', //5
+                ' ', //6
+                '┬', //7
+                'O', //8
+                '┴', //9
+            };
+            int width = 9;
+            int height = 9;
+            int[,] hangman = new int[,]
+            {
+                { 3, 4, 4, 4, 7, 4, 4, 4, 1 },
+                { 5, 6, 6, 6, 5, 6, 6, 6, 5 },
+                { 5, 6, 6, 6, 8, 6, 6, 6, 5 },
+                { 5, 6, 6, 3, 7, 1, 6, 6, 5 },
+                { 5, 6, 6, 5, 5, 5, 6, 6, 5 },
+                { 5, 6, 6, 3, 9, 1, 6, 6, 5 },
+                { 5, 6, 6, 5, 6, 5, 6, 6, 5 },
+                { 5, 6, 6, 6, 6, 6, 6, 6, 5 },
+                { 0, 4, 4, 4, 4, 4, 4, 4, 2 },
+            };
+            int[,] livesMask = new int[,]
+            {
+                { -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1,  9, -1, -1, -1, -1 },
+                { -1, -1, -1, -1,  8, -1, -1, -1, -1 },
+                { -1, -1, -1,  6,  7,  4, -1, -1, -1 },
+                { -1, -1, -1,  5,  7,  3, -1, -1, -1 },
+                { -1, -1, -1,  1,  2,  0, -1, -1, -1 },
+                { -1, -1, -1,  1, -1,  0, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+            };
+            for (int x = 0; x < width; x++)
+            {
+
+                for (int y = 0; y < height; y++)
+                {
+                    if (livesMask[x, y] >= lives || livesMask[x, y] == -1)
+                    {
+                        Console.Write(lineChars[hangman[x, y]]);
+                    }
+                    else
+                    {
+                        Console.Write(' ');
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("lives:" + lives);
+        }
 
     }
 }
